@@ -1,0 +1,39 @@
+<?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@principle-works.jp so we can send you a copy immediately.
+ *
+ * @category   Marketing
+ * @package    Rack_Fbtracking
+ * @copyright  Copyright (c) 2015 Veriteworks Inc. (http://principle-works.jp/)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+if(Mage::getStoreConfig('fbtracking/conversion/is_active')) :
+    $order = Mage::getModel('sales/order')->load(Mage::getSingleton('checkout/session')->getLastOrderId());
+    $total = (int)$order->getGrandTotal();
+    $id = Mage::getStoreConfig('fbtracking/conversion/id');
+    $currency = Mage::app()->getStore()->getCurrentCurrencyCode();
+?>
+<script>(function() {
+        var _fbq = window._fbq || (window._fbq = []);
+        if (!_fbq.loaded) {
+            var fbds = document.createElement('script');
+            fbds.async = true;
+            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(fbds, s);
+            _fbq.loaded = true;
+        }
+    })();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', '<?php $id ?>', {'value':'<?php echo $total;?>','currency':'<?php echo $currency;?>'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=<?php $id ?>&amp;cd[value]=<?php echo $total;?>&amp;cd[currency]=<?php echo $currency;?>&amp;noscript=1" /></noscript>
+<?php endif;?>
