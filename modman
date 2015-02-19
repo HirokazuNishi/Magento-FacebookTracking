@@ -1,0 +1,5 @@
+src/app/etc/modules/Rack_Fbtracking.xml app/etc/modules/Rack_Fbtracking.xml
+src/app/code/community/Rack/Fbtracking app/code/community/Rack/Fbtracking
+src/app/design/frontend/base/default/layout/rack_fbtracking.xml app/design/frontend/base/default/layout/rack_fbtracking.xml
+src/app/design/frontend/base/default/template/rack_fbtracking app/design/frontend/base/default/template/rack_fbtracking
+src/app/locale/ja_JP/Rack_Fbtracking.csv app/locale/ja_JP/Rack_Fbtracking.csv
